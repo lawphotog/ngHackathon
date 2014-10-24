@@ -10,17 +10,21 @@ angular.module('starter.controllers', [])
   //}).then(function(modal) {
   //  $scope.modal = modal;
   //});
-  //
+
+
+
   // Triggered in the login modal to close it
   $scope.closeLogin = function() {
     $scope.modal.hide();
   };
 
-    //$scope.logout = function() {
-    //    auth.signout();
-    //    store.remove('profile');
-    //    store.remove('token');
-    //};
+    $scope.logout = function(){
+        console.log("logging out");
+        auth.signout();
+        store.remove('profile');
+        store.remove('token');
+
+    }
 
   // Open the login modal
   $scope.login = function() {
@@ -36,8 +40,8 @@ angular.module('starter.controllers', [])
           store.set('refreshToken', refreshToken);
           $location.path('/');
 
-          console.log('success login');
-          console.log(profile.nickname);
+
+
 
       }, function() {
           // Error callback
@@ -240,6 +244,20 @@ angular.module('starter.controllers', [])
 
 
 
+
+    })
+
+.controller('HomeCtrl', function(){
+        //$scope.email = null;
+        //
+        //if(store.get('profile'))
+        //{
+        //    $scope.email = store.get('profile').email;
+        //
+        //}
+
+
+        //$state.go($state.$current, null, {reload: true});
 
     })
 

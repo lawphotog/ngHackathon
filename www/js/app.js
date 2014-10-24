@@ -39,6 +39,15 @@ angular.module('starter', [
       controller: 'AppCtrl'
     })
 
+      .state('app.home', {
+        url: "/home",
+        views: {
+          'menuContent': {
+            templateUrl : 'templates/home.html',
+            controller : 'HomeCtrl'
+          }
+        }
+      })
       .state('app.nearyou', {
         url: '/nearyou',
         views: {
@@ -55,15 +64,15 @@ angular.module('starter', [
         }
       })
 
-      .state('login', {
-        url: '/login',
-        views: {
-          'menuContent' :{
-            templateUrl: "templates/login.html",
-            controller: 'LoginCtrl'
-          }
-        }
-      })
+      //.state('login', {
+      //  url: '/login',
+      //  views: {
+      //    'menuContent' :{
+      //      templateUrl: "templates/login.html",
+      //      controller: 'LoginCtrl'
+      //    }
+      //  }
+      //})
     // Your app states
       .state('dashboard', {
         url: '/dashboard',
@@ -92,7 +101,10 @@ angular.module('starter', [
         'menuContent' :{
           templateUrl: "templates/search.html"
         }
-      }
+      },
+        data: {
+          requiresLogin: true
+        }
     })
 
     .state('app.categories', {
@@ -102,7 +114,10 @@ angular.module('starter', [
           templateUrl: "templates/categories.html",
           controller: 'CategoriesCtrl'
         }
-      }
+      },
+        data: {
+          requiresLogin: true
+        }
     })
 
     .state('app.facilities', {
@@ -112,7 +127,10 @@ angular.module('starter', [
           templateUrl: "templates/facilities.html",
           controller: 'FacilitiesCtrl'
         }
-      }
+      },
+        data: {
+          requiresLogin: true
+        }
     })
 
       .state('app.facility', {
@@ -122,13 +140,17 @@ angular.module('starter', [
             templateUrl: 'templates/facility.html',
             controller: 'FacilityCtrl'
           }
+        },
+        data: {
+          requiresLogin: true
         }
 
       })
 
+
   ;
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/categories');
+  $urlRouterProvider.otherwise('/app/home');
 
       authProvider.init({
         domain: 'nghackathon.auth0.com',

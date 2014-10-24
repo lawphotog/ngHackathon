@@ -1,0 +1,20 @@
+<ion-view title="ngHackathon">
+    <ion-nav-buttons side="left">
+        <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+    </ion-nav-buttons>
+
+    <ion-nav-buttons side="right">
+        <button class="button button-icon icon ion-log-out" ng-click="logout()"></button>
+    </ion-nav-buttons>
+    <ion-content class="has-header">
+        <h1>Welcome to ngHackathon App!</h1>
+        <div ng-show="email">
+            Welcome {{email}}. You can start browsing via left menu.
+        </div>
+
+        <p>
+            Please login to use this app.
+        </p>
+        <button class="button button-positive" ng-click="login()">Login</button>
+    </ion-content>
+</ion-view>
