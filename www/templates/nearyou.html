@@ -1,0 +1,25 @@
+<ion-view title="Facilities near you">
+    <ion-nav-buttons side="left">
+        <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+    </ion-nav-buttons>
+    <ion-content class="has-header">
+        <h1>Facilities near you</h1>
+
+        <div class="list">
+            <label class="item item-input item-select">
+                <div class="input-label">
+                    Categories
+                </div>
+                <select ng-options="category.idcategories as category.name for category in categories" ng-model="category" ng-change="GetFacilities(category)">
+                    <option value="">Select a category</option>
+                </select>
+            </label>
+        </div>
+
+        <ion-list>
+            <ion-item ng-repeat="facility in facilities" href="#/app/facility/{{facility.id}}">
+                {{facility.name}}
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>
