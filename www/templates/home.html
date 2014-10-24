@@ -4,17 +4,21 @@
     </ion-nav-buttons>
 
     <ion-nav-buttons side="right">
-        <button class="button button-icon icon ion-log-out" ng-click="logout()"></button>
+        <button class="button button-icon icon ion-log-out" ng-click="logout()" ng-show="isAuthenticated"></button>
     </ion-nav-buttons>
     <ion-content class="has-header">
         <h1>Welcome to ngHackathon App!</h1>
-        <div ng-show="email">
-            Welcome {{email}}. You can start browsing via left menu.
+        <!--{{isAuthenticated}}-->
+        <div ng-show="isAuthenticated">
+            Welcome, You can start browsing via left menu.
         </div>
 
-        <p>
-            Please login to use this app.
+        <p  ng-show="!isAuthenticated">
+            Please login or sign up to use this app.
+            <br/>
+            <button class="button button-positive" ng-click="login()" ng-if="!isAuthenticated">Login</button>
+            <button class="button button-positive" ng-click="signup()" ng-if="!isAuthenticated">Sign Up</button>
         </p>
-        <button class="button button-positive" ng-click="login()">Login</button>
+
     </ion-content>
 </ion-view>

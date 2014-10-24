@@ -23,11 +23,18 @@ angular.module('starter.controllers', [])
         auth.signout();
         store.remove('profile');
         store.remove('token');
+        $location.path('/app/categories');
+
 
     }
 
   // Open the login modal
   $scope.login = function() {
+
+      auth.signout();
+      store.remove('profile');
+      store.remove('token');
+
       auth.signin({
           authParams: {
               scope: 'openid offline_access',
@@ -38,15 +45,36 @@ angular.module('starter.controllers', [])
           store.set('profile', profile);
           store.set('token', token);
           store.set('refreshToken', refreshToken);
-          $location.path('/');
 
-
-
-
+          $location.path('/app/categories');
       }, function() {
           // Error callback
       });
   };
+
+        $scope.signup = function () {
+
+            auth.signout();
+            store.remove('profile');
+            store.remove('token');
+
+            auth.signup({
+                authParams: {
+                    scope: 'openid offline_access',
+                    device: 'Mobile device'
+                }
+            }, function(profile, token, accessToken, state, refreshToken) {
+                // Success callback
+                store.set('profile', profile);
+                store.set('token', token);
+                store.set('refreshToken', refreshToken);
+
+                $location.path('/app/categories');
+
+            }, function() {
+                // Error callback
+            });
+        }
 
   // Perform the login action when the user submits the login form
   $scope.doLogin = function() {
@@ -103,20 +131,6 @@ angular.module('starter.controllers', [])
   //    $scope.closeSignup();
   //  }, 1000);
   //};
-})
-
-.controller('PlaylistsCtrl', function($scope) {
-  $scope.playlists = [
-    { title: 'Reggae', id: 1 },
-    { title: 'Chill', id: 2 },
-    { title: 'Dubstep', id: 3 },
-    { title: 'Indie', id: 4 },
-    { title: 'Rap', id: 5 },
-    { title: 'Cowbell', id: 6 }
-  ];
-})
-
-.controller('PlaylistCtrl', function($scope, $stateParams) {
 })
 
 .controller('CategoriesCtrl', function($scope, $http, $ionicLoading) {
@@ -247,16 +261,24 @@ angular.module('starter.controllers', [])
 
     })
 
-.controller('HomeCtrl', function(){
-        //$scope.email = null;
-        //
-        //if(store.get('profile'))
-        //{
-        //    $scope.email = store.get('profile').email;
-        //
-        //}
+.controller('HomeCtrl', function(store, $scope, $location){
 
+        var profile = store.get('profile');
+        $scope.isAuthenticated = null;
+        if(profile)
+        {
+            console.log('your email is:' + profile.email);
 
+            $scope.isAuthenticated = true;
+
+            //$location.path('/');
+        }
+        else
+        {
+            console.log('no email');
+            $scope.isAuthenticated = false;
+            //$location.path('/');
+        }
         //$state.go($state.$current, null, {reload: true});
 
     })

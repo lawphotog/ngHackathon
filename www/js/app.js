@@ -10,7 +10,8 @@ angular.module('starter', [
   'auth0',
   'angular-storage',
   'angular-jwt',
-  'geolocation'
+  'geolocation',
+  'ngRoute'
 ])
 
 .run(function($ionicPlatform) {
@@ -147,7 +148,9 @@ angular.module('starter', [
 
       })
 
-
+      .state('login', {
+        template: 'not authorize'
+      })
   ;
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/home');
